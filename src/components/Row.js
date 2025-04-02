@@ -7,12 +7,13 @@ const Row = ({ isLargeRow, title, id, fetchUrl }) => {
     
     useEffect(() => {
         fetchMovieData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchMovieData = async () => {
         const request = await axios.get(fetchUrl);
         console.log('request', request);
-        // setMovies(request.data.results ?? []);
+        setMovies(request.data.results);
     };
   
     return (
@@ -20,7 +21,10 @@ const Row = ({ isLargeRow, title, id, fetchUrl }) => {
         <h2>{title}</h2>
         <div className='slider'>
             <div className='slider__arrow-left'>
-                <span className='arrow'>{"<"}</span>
+                <span className='arrow' 
+                onClick={() => {
+                    document.getElementById(id).scrollLeft -= window.innerWidth - 80;
+                }}>{"<"}</span>
             </div>
             <div id={id} className='row__posters'>
                 {movies.map((movie) => (
@@ -33,7 +37,10 @@ const Row = ({ isLargeRow, title, id, fetchUrl }) => {
                 ))}
             </div>
                 <div className='slider__arrow-right'>
-                    <span className='arrow'>{">"}</span>
+                    <span className='arrow'
+                    onClick={() => {
+                        document.getElementById(id).scrollLeft += window.innerWidth - 80;
+                    }}>{">"}</span>
                 </div>
         </div>
     </section>
