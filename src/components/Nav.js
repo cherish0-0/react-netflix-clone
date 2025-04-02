@@ -13,13 +13,14 @@ export default function Nav() {
       } else {
         setShow(false);
       }
-    })
+    });
 
     return () => {
       window.removeEventListener("scroll", () => {})
     };
   }, []);
-  return <nav className={`nav ${show && "nav__black"} `}>
+  return (
+  <nav className={`nav ${show && "nav__black"} `}>
     <img 
     alt="logo"
     src={logo}
@@ -31,4 +32,5 @@ export default function Nav() {
         className='nav__avatar'
     ></img>
   </nav>
+  );
 }
